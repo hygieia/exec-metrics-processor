@@ -15,7 +15,8 @@ before_script:
 
 script:
 - if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_BRANCH" = "master" ]; then mvn clean install -q -U; fi
-
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+  cp ./src/devops/deploy-snapshot.sh . && ./deploy-snapshot.sh; fi
 notifications:
   webhooks:
     urls: https://webhooks.gitter.im/e/48597b0f75dd571734bc
